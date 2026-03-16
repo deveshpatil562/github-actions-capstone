@@ -10,8 +10,9 @@ on:
         required: true
         type: string
       environment:
-        required: true
+        required: false
         type: string
+        default: production
     secrets:
       docker_username:
         required: true
@@ -21,13 +22,17 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
-    outputs:
-      image: ${{ steps.publish.outputs.image_url }}   # ✅ declare job output
     steps:
       - uses: actions/checkout@v4
-      - run: echo "${{ secrets.docker_token }}" | docker login -u ${{ secrets.docker_username }} --password-stdin
-      - run: docker build -t ${{ inputs.image_name }}:${{ inputs.tag }} .
-      - run: docker push ${{ inputs.image_name }}:${{ inputs.tag }}
-      - id: publish
+
+      - name: Log in to Docker
+        run: echo "${{ secrets.docker_token }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t ${{ inputs.image_name }}:${{ inputs.tag }} .
+
+      - name: Push Docker image
+        run: docker push ${{ inputs.image_name }}:${{ inputs.tag }}
+
+      - name: Set output
         run: echo "image_url=${{ inputs.image_name }}:${{ inputs.tag }}" >> $GITHUB_OUTPUT
