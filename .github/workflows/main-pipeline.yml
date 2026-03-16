@@ -16,6 +16,7 @@ jobs:
     with:
       image_name: myflaskapp
       tag: latest
+      environment: production   # pass environment explicitly
     secrets: inherit
 
   deploy:
