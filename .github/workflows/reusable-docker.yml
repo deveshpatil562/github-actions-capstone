@@ -14,9 +14,9 @@ on:
         type: string
         default: production
     secrets:
-      docker_username:
+      DOCKER_USERNAME:
         required: true
-      docker_token:
+      DOCKER_TOKEN:
         required: true
 
 jobs:
@@ -25,14 +25,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Log in to Docker
-        run: echo "${{ secrets.docker_token }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ inputs.image_name }}:${{ inputs.tag }} .
+        run: |
+          docker build -t ${{ inputs.image_name }}:latest \
+                       -t ${{ inputs.image_name }}:${{ github.sha }} .
 
       - name: Push Docker image
-        run: docker push ${{ inputs.image_name }}:${{ inputs.tag }}
+        run: |
+          docker push ${{ inputs.image_name }}:latest
+          docker push ${{ inputs.image_name }}:${{ github.sha }}
 
       - name: Set output
-        run: echo "image_url=${{ inputs.image_name }}:${{ inputs.tag }}" >> $GITHUB_OUTPUT
+        run: echo "image_url=${{ inputs.image_name }}:${{ github.sha }}" >> $GITHUB_OUTPUT
