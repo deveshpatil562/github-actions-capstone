@@ -1,0 +1,21 @@
+name: Health Check
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker pull myflaskapp:latest
+      - run: docker run -d -p 5000:5000 --name myflaskapp myflaskapp:latest
+      - run: sleep 5
+      - run: curl -f http://localhost:5000/health || exit 1
+      - run: docker stop myflaskapp && docker rm myflaskapp
+      - run: |
+          echo "## Health Check Report" >> $GITHUB_STEP_SUMMARY
+          echo "- Image: myflaskapp:latest" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: PASSED" >> $GITHUB_STEP_SUMMARY
+          echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY
