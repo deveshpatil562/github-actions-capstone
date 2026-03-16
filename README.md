@@ -1,14 +1,19 @@
 # 🚀 DevOps Portfolio Website (Flask)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/YOUR_GITHUB/portfolio-devops-site?style=social)
-![GitHub forks](https://img.shields.io/github/forks/YOUR_GITHUB/portfolio-devops-site?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/deveshpatil562/YOUR_REPO?style=social)
+![GitHub forks](https://img.shields.io/github/forks/deveshpatil562/YOUR_REPO?style=social)
 
-![Build](https://img.shields.io/github/actions/workflow/status/YOUR_GITHUB/portfolio-devops-site/main-pipeline.yml?label=CI%2FCD%20Pipeline)
+![CI/CD Pipeline](https://img.shields.io/github/actions/workflow/status/deveshpatil562/YOUR_REPO/main-pipeline.yml?label=CI%2FCD%20Pipeline)
+
 ![Docker](https://img.shields.io/badge/docker-ready-blue)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=YOUR_GITHUB.portfolio-devops-site)
+![GitHub last commit](https://img.shields.io/github/last-commit/deveshpatil562/YOUR_REPO)
+![GitHub issues](https://img.shields.io/github/issues/deveshpatil562/YOUR_REPO)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/deveshpatil562/YOUR_REPO)
+
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=deveshpatil562.YOUR_REPO)
 
 ---
 
