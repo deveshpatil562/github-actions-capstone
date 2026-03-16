@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ profile.name }} | Portfolio</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script defer src="{{ url_for('static', filename='script.js') }}"></script>
+
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+
+<h1>{{ profile.name }}</h1>
+
+<p>{{ profile.title }}</p>
+
+<div class="social">
+
+<a href="https://github.com/{{ profile.github }}" target="_blank">
+GitHub
+</a>
+
+<a href="{{ profile.linkedin }}" target="_blank">
+LinkedIn
+</a>
+
+</div>
+
+<button id="themeToggle">Toggle Theme</button>
+
+</header>
+
+
+<section class="about">
+
+<h2>About</h2>
+
+<p>{{ profile.about }}</p>
+
+</section>
+
+
+<section class="skills">
+
+<h2>Skills</h2>
+
+<div class="terminal">
+
+<p>$ loading skills...</p>
+
+{% for skill in skills %}
+
+<p>> {{ skill }}</p>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+
+<section class="projects">
+
+<h2>GitHub Projects</h2>
+
+<div class="projects-grid">
+
+{% for repo in repos %}
+
+<div class="project-card">
+
+<h3>📦 {{ repo.name }}</h3>
+
+<p>{{ repo.description or "No description available" }}</p>
+
+<a href="{{ repo.html_url }}" target="_blank">
+View Repo →
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+
+<section class="visitors">
+
+<h3>Visitors: {{ visitors }}</h3>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 {{ profile.name }} | Portfolio</p>
+
+</footer>
+
+<!-- DevOps Background Animation -->
+<script src="{{ url_for('static', filename='devops-bg.js') }}"></script>
+
+</body>
+</html>
